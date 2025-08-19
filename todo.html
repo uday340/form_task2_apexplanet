@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration + To-Do List</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        form, .todo-container {
+            background: #fff;
+            width: 400px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+        }
+
+        .gender-options, .checkbox-group {
+            margin-top: 8px;
+        }
+
+        .gender-options input,
+        .checkbox-group input {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* To-Do List */
+        .todo-container h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #todoInput {
+            width: 75%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        #addBtn {
+            width: 20%;
+            padding: 10px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #addBtn:hover {
+            background: #6a11cb;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .deleteBtn {
+            background: crimson;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Student Registration Form</h2>
+    <form id="regForm">
+        <label>Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" id="password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" required>
+        <p class="error" id="passError">Passwords do not match!</p>
+
+        <label>Gender</label>
+        <div class="gender-options">
+            <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female
+            <input type="radio" name="gender"> Other
+        </div>
+
+        <label>Date of Birth</label>
+        <input type="date" id="dob">
+
+        <label>Mobile No</label>
+        <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10 digit number" required>
+        <p class="error" id="mobileError">Enter a valid 10-digit number!</p>
+
+        <label>Address</label>
+        <textarea rows="3" placeholder="Enter your address"></textarea>
+
+        <label>Department</label>
+        <select>
+            <option>CSM</option>
+            <option>CSBS</option>
+            <option>AIDS</option>
+            <option>CAI</option>
+            <option>CSE</option>
+            <option>CSC</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>IT</option>
+        </select>
+
+        <label>Year of Study</label>
+        <select>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+
+        <label>Languages Known</label>
+        <div class="checkbox-group">
+            <input type="checkbox"> Telugu
+            <input type="checkbox"> English
+            <input type="checkbox"> Hindi
+            <input type="checkbox"> Tamil
+            <input type="checkbox"> Kannada
+        </div>
+
+        <label>Hobbies</label>
+        <div class="checkbox-group">
+            <input type="checkbox"> Reading
+            <input type="checkbox"> Sports
+            <input type="checkbox"> Music
+            <input type="checkbox"> Coding
+        </div>
+
+        <label>Upload Photo</label>
+        <input type="file" accept="image/*">
+
+        <label>Upload Resume</label>
+        <input type="file" accept=".pdf,.doc,.docx">
+
+        <div class="btn-container">
+            <input type="submit" class="btn" value="Register">
+            <input type="reset" class="btn" value="Clear">
+        </div>
+    </form>
+
+    <!-- To-Do List Section -->
+    <div class="todo-container">
+        <h3>📌 My To-Do List</h3>
+        <input type="text" id="todoInput" placeholder="Enter a task">
+        <button id="addBtn">Add</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <script>
+        // --- Form Validation ---
+        document.getElementById("regForm").addEventListener("submit", function(event) {
+            let pass = document.getElementById("password").value;
+            let confirmPass = document.getElementById("confirmPassword").value;
+            let mobile = document.getElementById("mobile").value;
+
+            let passError = document.getElementById("passError");
+            let mobileError = document.getElementById("mobileError");
+
+            passError.style.display = "none";
+            mobileError.style.display = "none";
+
+            let valid = true;
+
+            if (pass !== confirmPass) {
+                passError.style.display = "block";
+                valid = false;
+            }
+
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                mobileError.style.display = "block";
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+
+        // --- To-Do List Functionality ---
+        const todoInput = document.getElementById("todoInput");
+        const addBtn = document.getElementById("addBtn");
+        const todoList = document.getElementById("todoList");
+
+        addBtn.addEventListener("click", function() {
+            const task = todoInput.value.trim();
+            if (task === "") return;
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span>${task}</span>
+                <button class="deleteBtn">Delete</button>
+            `;
+
+            li.querySelector("span").addEventListener("click", function() {
+                li.classList.toggle("completed");
+            });
+
+            li.querySelector(".deleteBtn").addEventListener("click", function() {
+                li.remove();
+            });
+
+            todoList.appendChild(li);
+            todoInput.value = "";
+        });
+    </script>
+</body>
+</html>
